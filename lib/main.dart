@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Rick and Morty',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(brightness: Brightness.dark),
+        theme: ThemeData(brightness: Brightness.dark, useMaterial3: true),
         routerConfig: _router,
       ),
     );

@@ -1,27 +1,30 @@
 // To parse this JSON data, do
 //
-//     final character = characterFromMap(jsonString);
+//     final CharacterResponse = characterFromMap(jsonString);
 
 import 'dart:convert';
 
-class Character {
+class CharacterResponse {
   Info? info;
-  List<Result>? results;
+  List<Character>? results;
 
-  Character({
+  CharacterResponse({
     this.info,
     this.results,
   });
 
-  factory Character.fromJson(String str) => Character.fromMap(json.decode(str));
+  factory CharacterResponse.fromJson(String str) =>
+      CharacterResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Character.fromMap(Map<String, dynamic> json) => Character(
+  factory CharacterResponse.fromMap(Map<String, dynamic> json) =>
+      CharacterResponse(
         info: json["info"] == null ? null : Info.fromMap(json["info"]),
         results: json["results"] == null
             ? []
-            : List<Result>.from(json["results"]!.map((x) => Result.fromMap(x))),
+            : List<Character>.from(
+                json["results"]!.map((x) => Character.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -64,7 +67,7 @@ class Info {
       };
 }
 
-class Result {
+class Character {
   int? id;
   String? name;
   String? status;
@@ -78,7 +81,7 @@ class Result {
   String? url;
   DateTime? created;
 
-  Result({
+  Character({
     this.id,
     this.name,
     this.status,
@@ -93,11 +96,11 @@ class Result {
     this.created,
   });
 
-  factory Result.fromJson(String str) => Result.fromMap(json.decode(str));
+  factory Character.fromJson(String str) => Character.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Result.fromMap(Map<String, dynamic> json) => Result(
+  factory Character.fromMap(Map<String, dynamic> json) => Character(
         id: json["id"],
         name: json["name"],
         status: json["status"],
