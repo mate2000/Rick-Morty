@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rick_morty/providers/api_provider.dart';
 import 'package:rick_morty/screens/episodes_screen.dart';
 import 'package:rick_morty/screens/location_screen.dart';
+import 'package:rick_morty/widgets/search_delegate.dart';
 
 class CharacterScreen extends StatefulWidget {
   const CharacterScreen({Key? key}) : super(key: key);
@@ -66,6 +67,13 @@ class _CharacterScreenState extends State<CharacterScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: SearchCharacter());
+              },
+              icon: const Icon(Icons.search_sharp))
+        ],
       ),
       body: SizedBox(
         height: double.infinity,
