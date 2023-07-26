@@ -4,24 +4,27 @@
 
 import 'dart:convert';
 
-class Episodes {
+class EpisodesResponse {
   Info? info;
-  List<Result>? results;
+  List<Episode>? results;
 
-  Episodes({
+  EpisodesResponse({
     this.info,
     this.results,
   });
 
-  factory Episodes.fromJson(String str) => Episodes.fromMap(json.decode(str));
+  factory EpisodesResponse.fromJson(String str) =>
+      EpisodesResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Episodes.fromMap(Map<String, dynamic> json) => Episodes(
+  factory EpisodesResponse.fromMap(Map<String, dynamic> json) =>
+      EpisodesResponse(
         info: json["info"] == null ? null : Info.fromMap(json["info"]),
         results: json["results"] == null
             ? []
-            : List<Result>.from(json["results"]!.map((x) => Result.fromMap(x))),
+            : List<Episode>.from(
+                json["results"]!.map((x) => Episode.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -64,7 +67,7 @@ class Info {
       };
 }
 
-class Result {
+class Episode {
   int? id;
   String? name;
   String? airDate;
@@ -73,7 +76,7 @@ class Result {
   String? url;
   DateTime? created;
 
-  Result({
+  Episode({
     this.id,
     this.name,
     this.airDate,
@@ -83,11 +86,11 @@ class Result {
     this.created,
   });
 
-  factory Result.fromJson(String str) => Result.fromMap(json.decode(str));
+  factory Episode.fromJson(String str) => Episode.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Result.fromMap(Map<String, dynamic> json) => Result(
+  factory Episode.fromMap(Map<String, dynamic> json) => Episode(
         id: json["id"],
         name: json["name"],
         airDate: json["air_date"],
