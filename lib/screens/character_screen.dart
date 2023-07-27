@@ -5,6 +5,9 @@ import 'package:rick_morty/providers/api_provider.dart';
 import 'package:rick_morty/screens/episodes_screen.dart';
 import 'package:rick_morty/screens/location_screen.dart';
 import 'package:rick_morty/widgets/search_delegate.dart';
+import 'package:rick_morty/widgets/search_location_delegate.dart';
+
+import '../widgets/search_episodes_delegate.dart';
 
 class CharacterScreen extends StatefulWidget {
   const CharacterScreen({Key? key}) : super(key: key);
@@ -60,6 +63,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
           scrollController: scrollController,
           isLoading: isLoading)
     ];
+    final delegates = [SearchCharacter(), SearchEpisode(), SearchLocation()];
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -70,7 +74,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                showSearch(context: context, delegate: SearchCharacter());
+                showSearch(
+                    context: context, delegate: delegates[selectedIndex]);
               },
               icon: const Icon(Icons.search_sharp))
         ],

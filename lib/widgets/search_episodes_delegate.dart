@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:rick_morty/models/character.dart';
+import 'package:rick_morty/models/episodes.dart';
 import 'package:rick_morty/providers/api_provider.dart';
 
-class SearchCharacter extends SearchDelegate {
+class SearchEpisode extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -47,24 +47,25 @@ class SearchCharacter extends SearchDelegate {
       return circleLoad();
     }
     return FutureBuilder(
-      future: apiProvider.getCharacterbyName(query),
-      builder: (context, AsyncSnapshot<List<Character>> snapshot) {
+      future: apiProvider.getEpisodebyName(query),
+      builder: (context, AsyncSnapshot<List<Episode>> snapshot) {
         if (!snapshot.hasData) {
           return circleLoad();
         }
         return ListView.builder(
           itemCount: snapshot.data!.length,
           itemBuilder: (context, index) {
-            final character = snapshot.data![index];
+            final episode = snapshot.data![index];
             return ListTile(
               onTap: () {
-                context.go('/character', extra: character);
+                context.go('/episode', extra: episode);
               },
-              title: Text(character.name!),
+              title: Text(episode.name!),
               leading: Hero(
-                  tag: character.id!,
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(character.image!),
+                  tag: episode.id!,
+                  child: const CircleAvatar(
+                    backgroundImage:
+                        AssetImage('assets/images/rick_morty_poster.jpg'),
                   )),
             );
           },
