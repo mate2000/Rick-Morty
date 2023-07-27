@@ -33,6 +33,20 @@ class ApiProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<List<Location>> getLocationbyName(String name) async {
+    final result =
+        await Dio().get("$url/api/location", queryParameters: {'name': name});
+    final response = LocationsResponse.fromMap(result.data);
+    return response.results!;
+  }
+
+  Future<List<Episode>> getEpisodebyName(String name) async {
+    final result =
+        await Dio().get("$url/api/episode", queryParameters: {'name': name});
+    final response = EpisodesResponse.fromMap(result.data);
+    return response.results!;
+  }
+
   Future<void> getEpisodes(int page) async {
     final result =
         await Dio().get("$url/api/episode", queryParameters: {'page': page});
