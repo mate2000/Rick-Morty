@@ -74,8 +74,8 @@ class Character {
   String? species;
   String? type;
   String? gender;
-  Location? origin;
-  Location? location;
+  CurrentLocation? origin;
+  CurrentLocation? location;
   String? image;
   List<String>? episode;
   String? url;
@@ -107,11 +107,12 @@ class Character {
         species: json["species"],
         type: json["type"],
         gender: json["gender"],
-        origin:
-            json["origin"] == null ? null : Location.fromMap(json["origin"]),
+        origin: json["origin"] == null
+            ? null
+            : CurrentLocation.fromMap(json["origin"]),
         location: json["location"] == null
             ? null
-            : Location.fromMap(json["location"]),
+            : CurrentLocation.fromMap(json["location"]),
         image: json["image"],
         episode: json["episode"] == null
             ? []
@@ -138,20 +139,21 @@ class Character {
       };
 }
 
-class Location {
+class CurrentLocation {
   String? name;
   String? url;
 
-  Location({
+  CurrentLocation({
     this.name,
     this.url,
   });
 
-  factory Location.fromJson(String str) => Location.fromMap(json.decode(str));
+  factory CurrentLocation.fromJson(String str) =>
+      CurrentLocation.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Location.fromMap(Map<String, dynamic> json) => Location(
+  factory CurrentLocation.fromMap(Map<String, dynamic> json) => CurrentLocation(
         name: json["name"],
         url: json["url"],
       );
